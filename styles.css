@@ -85,6 +85,7 @@ p { margin: 0; }
 .role-ai { color: var(--ai); }
 .lead { max-width: 700px; font-size: clamp(16px, 1.9vw, 18px); color: var(--muted); margin-top: 20px; }
 .lead strong { color: var(--text); font-weight: 600; }
+.lead.e2e { margin-top: 12px; padding-left: 14px; border-left: 3px solid var(--accent); }
 
 .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
 .cta.center { justify-content: center; }
@@ -129,13 +130,21 @@ p { margin: 0; }
 .tl-marker { position: relative; z-index: 1; }
 .org-badge {
   display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 14px;
-  font-weight: 800; color: #fff; font-size: 20px; letter-spacing: -.02em;
+  background: #fff; border: 1px solid var(--border); overflow: hidden;
   box-shadow: 0 0 0 6px var(--bg);
 }
-.org-badge.deloitte { background: #0f172a; }
-.org-badge.deloitte::after { content: "."; color: #86bc25; }
-.org-badge.tcs { background: #2c4a9a; font-size: 15px; }
-@media (prefers-color-scheme: dark) { .org-badge.deloitte { background: #000; outline: 1px solid var(--border); } }
+.org-badge img { width: 100%; height: 100%; object-fit: contain; }
+.org-badge.wide img { padding: 6px; }
+
+/* Logo strip (always on white tiles so brand colours read in dark mode too) */
+.logo-strip { margin-top: 40px; }
+.logo-strip p { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+.logo-strip ul { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+.logo-strip li {
+  display: flex; align-items: center; justify-content: center; height: 72px; padding: 0 14px;
+  background: #fff; border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow);
+}
+.logo-strip img { max-width: 100%; width: auto; object-fit: contain; }
 
 .job {
   background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
@@ -169,7 +178,7 @@ p { margin: 0; }
 
 /* Cards / grids */
 .grid { display: grid; gap: 20px; }
-.projects { grid-template-columns: repeat(3, 1fr); }
+.projects { grid-template-columns: repeat(2, 1fr); }
 .small { grid-template-columns: repeat(4, 1fr); gap: 16px; }
 .skills { grid-template-columns: repeat(2, 1fr); }
 .skills .wide { grid-column: 1 / -1; }
@@ -214,8 +223,7 @@ p { margin: 0; }
 
 /* Laptop / small desktop */
 @media (max-width: 1024px) {
-  .projects { grid-template-columns: repeat(2, 1fr); }
-  .projects .ai { grid-column: 1 / -1; }
+  .logo-strip ul { grid-template-columns: repeat(3, 1fr); }
 }
 
 /* Tablet */
@@ -224,11 +232,12 @@ p { margin: 0; }
   .hero { padding-top: 64px; }
   .stats { grid-template-columns: repeat(2, 1fr); }
   .impact { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .impact li:last-child:nth-child(odd) { grid-column: 1 / -1; }
   .small { grid-template-columns: repeat(2, 1fr); }
   .edu { grid-template-columns: 1fr; }
   .tl-item { grid-template-columns: 44px 1fr; gap: 16px; }
-  .org-badge { width: 44px; height: 44px; font-size: 17px; border-radius: 12px; }
-  .org-badge.tcs { font-size: 12px; }
+  .org-badge { width: 44px; height: 44px; border-radius: 12px; }
+  .org-badge.wide img { padding: 4px; }
   .timeline::before { left: 21px; }
 }
 
@@ -251,7 +260,11 @@ p { margin: 0; }
   .tl-item { grid-template-columns: 1fr; gap: 0; }
   .tl-marker { position: absolute; margin: 20px 0 0 20px; }
   .tl-item { position: relative; }
-  .org-badge { box-shadow: none; width: 40px; height: 40px; font-size: 16px; }
+  .org-badge { box-shadow: none; width: 40px; height: 40px; }
+  .logo-strip { margin-top: 32px; }
+  .logo-strip ul { gap: 10px; }
+  .logo-strip li { height: 60px; padding: 0 10px; }
+  .logo-strip img { transform: scale(.85); }
   .job { padding: 20px; }
   .job-title { padding-left: 54px; min-height: 40px; flex-basis: 100%; }
   .job h3 { font-size: 17px; }
